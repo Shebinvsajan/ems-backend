@@ -4,7 +4,9 @@ const cors = require('cors')
 require('dotenv').config()
 const server = express()
 const logic = require('./services/logic')
+const path = require('path')
 
+server.use(express.static('dist'))
 
 server.use(cors({
     origin: "http://localhost:3000"
@@ -90,4 +92,8 @@ server.post('/update-task', (req, res) => {
     logic.upTask(req.body.id, req.body.cname, req.body.task, req.body.status).then((result) => {
         res.status(result.statusCode).json(result)
     })
+})
+
+server.get('/*',(req,res)=>{
+    res.sendFile(path.join(`${path.resolve(path.dirname(''))}/dist/index.html`))
 })
