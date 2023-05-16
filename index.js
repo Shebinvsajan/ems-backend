@@ -9,7 +9,7 @@ const path = require('path')
 server.use(express.static('dist'))
 
 server.use(cors({
-    origin: "http://localhost:3000"
+    origin: "*"
 }))
 
 
